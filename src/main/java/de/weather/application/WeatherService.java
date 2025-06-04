@@ -13,18 +13,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class WeatherService {
-    public List<Weather> getWeatherByDate(String startDate) {
+    public List<Weather> getWeatherByDate(String startDate, String endDate) {
 //        String csvFile = "/home/praktikant/Temperatur/src/main/resources/weather.csv"; 
         List<Weather> result = new ArrayList<>();
         String line;
         String cvsSplitBy = ",";
         LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
         try (BufferedReader br = new BufferedReader(
                 new InputStreamReader(new ClassPathResource("weather.csv").getInputStream()))) {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(cvsSplitBy);
                 LocalDate current = LocalDate.parse(data[0]);
-                if (!current.isBefore(start) && !current.isAfter(start.plusDays(6))) {
+                if (current.compareTo(start) >= 0 && current.compareTo(end) <= 0) {
                     result.add(new Weather(
                         data[0],
                         Double.parseDouble(data[1]),

@@ -11,8 +11,8 @@ public class WeatherController {
     @Autowired
     private WeatherService weatherService;
 
-    @GetMapping("/{date}")
-    public List<Weather> getWeatherByDate(@PathVariable String date) {
-        return weatherService.getWeatherByDate(date);
+    @GetMapping("/{startDate}/{endDate}")
+    public List<Weather> getWeatherByDate(@PathVariable String startDate, @PathVariable String endDate) {
+        return weatherService.getWeatherByDate(startDate, endDate);
     }
 }
