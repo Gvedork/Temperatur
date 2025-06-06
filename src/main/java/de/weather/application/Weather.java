@@ -1,5 +1,8 @@
 package de.weather.application;
 
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 // import org.springframework.web.bind.annotation.CrossOrigin;
 // import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +54,26 @@ public class Weather {
     }
     public String getWeatherType() {
         return weather_type;
+    }
+
+    private Double feeling;
+
+    public void setFeeling(Double feeling) {
+        this.feeling = feeling;
+    }
+    public Double getFeeling() {
+        return feeling;
+    }   
+
+// Add this DTO class (can be a separate file or static inner class)
+    public static class WeatherFeelingRequest {
+    private String date;
+    private double feeling;
+
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
+    public double getFeeling() { return feeling; }
+    public void setFeeling(double feeling) { this.feeling = feeling; }
     }
 }
 
